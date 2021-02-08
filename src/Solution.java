@@ -1,45 +1,63 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
-//Write your code here
-//class minus extends Exception {
-//    public void getMessage() {
-//
-//    }
-//}
+public class Solution {
+    // Write your code here.
 
-class Calculator extends Exception {
+    LinkedList queue = new LinkedList();
+    Stack<Character> stack = new Stack<>();
 
-    public int power(int n, int p) throws Exception {
-        double num = 0;
-        if (n > 0 && p >= 0) {
-            num = Math.pow(n, p);
-        }
-        else if( n < 0 || p < 0 ) {
-            throw new Exception("n and p should be non-negative"); // 강제로 예외를 발생 시
-        }
-        return (int)num;
+    public Solution() {
+        LinkedList queue = new LinkedList();
+        Stack<Character> stack = new Stack<>();
     }
-}
 
-class Solution {
+    public void pushCharacter( char c ) {
+        stack.push(c);
+    }
+
+    public char popCharacter() {
+       return stack.pop();
+    }
+
+    public void enqueueCharacter( char c ) {
+        queue.addLast(c);
+    }
+
+    public char dequeueCharacter() {
+        return (char) queue.remove(0);
+    }
+
+
 
     public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        String input = scan.nextLine();
+        scan.close();
 
-        Scanner in = new Scanner(System.in);
-        int t = in.nextInt();
-        while (t-- > 0) {
+        // Convert input String to an array of characters:
+        char[] s = input.toCharArray();
 
-            int n = in.nextInt();
-            int p = in.nextInt();
-            Calculator myCalculator = new Calculator();
-            try {
-                int ans = myCalculator.power(n, p);
-                System.out.println(ans);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+        // Create a Solution object:
+        Solution p = new Solution();
+
+        // Enqueue/Push all chars to their respective data structures:
+        for (char c : s) {
+            p.pushCharacter(c);
+            p.enqueueCharacter(c);
+        }
+
+        // Pop/Dequeue the chars at the head of both data structures and compare them:
+        boolean isPalindrome = true;
+        for (int i = 0; i < s.length/2; i++) {
+            if (p.popCharacter() != p.dequeueCharacter()) {
+                isPalindrome = false;
+                break;
             }
         }
-        in.close();
+
+        //Finally, print whether string s is palindrome or not.
+        System.out.println( "The word, " + input + ", is "
+                + ( (!isPalindrome) ? "not a palindrome." : "a palindrome." ) );
     }
 }
