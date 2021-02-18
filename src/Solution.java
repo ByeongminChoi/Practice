@@ -7,10 +7,9 @@ interface AdvancedArithmetic{
 class Calculator implements AdvancedArithmetic {
     public int divisorSum(int n) {
         int sum = 0;
-        for(int i = 1; i <= n; i++){
-            while(n%i == 0){
+        for(int i = 1; i <= n; i++){ // 시간복잡도상 굳이 while문을 사용할 필요가 없다
+            if(n%i == 0){
                 sum += i;
-                i++;
                 //n = n/i; 소인수분해 시 i = 2 시작
             }
         }
