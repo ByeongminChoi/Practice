@@ -1,33 +1,18 @@
 import java.io.*;
 import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
 
-interface AdvancedArithmetic{
-    int divisorSum(int n);
-}
-class Calculator implements AdvancedArithmetic {
-    public int divisorSum(int n) {
-        int sum = 0;
-        for(int i = 1; i <= n; i++){
-            while(n%i == 0){
-                sum += i;
-                i++;
-                //n = n/i; 소인수분해 시 i = 2 시작
-            }
-        }
-        return sum;
-    }
-}
-
-class Solution {
+public class Solution {
 
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        int n = scan.nextInt();
-        scan.close();
-
-        AdvancedArithmetic myCalculator = new Calculator();
-        int sum = myCalculator.divisorSum(n);
-        System.out.println("I implemented: " + myCalculator.getClass().getInterfaces()[0].getName() );
-        System.out.println(sum);
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int[] a = new int[n];
+        for(int a_i=0; a_i < n; a_i++){
+            a[a_i] = in.nextInt();
+        }
+        // Write Your Code Here
     }
 }
