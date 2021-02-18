@@ -1,63 +1,33 @@
 import java.io.*;
 import java.util.*;
 
-public class Solution {
-    // Write your code here.
-
-    LinkedList queue = new LinkedList();
-    Stack<Character> stack = new Stack<>();
-
-    public Solution() {
-        LinkedList queue = new LinkedList();
-        Stack<Character> stack = new Stack<>();
+interface AdvancedArithmetic{
+    int divisorSum(int n);
+}
+class Calculator implements AdvancedArithmetic {
+    public int divisorSum(int n) {
+        int sum = 0;
+        for(int i = 1; i <= n; i++){
+            while(n%i == 0){
+                sum += i;
+                i++;
+                //n = n/i; 소인수분해 시 i = 2 시작
+            }
+        }
+        return sum;
     }
+}
 
-    public void pushCharacter( char c ) {
-        stack.push(c);
-    }
-
-    public char popCharacter() {
-       return stack.pop();
-    }
-
-    public void enqueueCharacter( char c ) {
-        queue.addLast(c);
-    }
-
-    public char dequeueCharacter() {
-        return (char) queue.remove(0);
-    }
-
-
+class Solution {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        String input = scan.nextLine();
+        int n = scan.nextInt();
         scan.close();
 
-        // Convert input String to an array of characters:
-        char[] s = input.toCharArray();
-
-        // Create a Solution object:
-        Solution p = new Solution();
-
-        // Enqueue/Push all chars to their respective data structures:
-        for (char c : s) {
-            p.pushCharacter(c);
-            p.enqueueCharacter(c);
-        }
-
-        // Pop/Dequeue the chars at the head of both data structures and compare them:
-        boolean isPalindrome = true;
-        for (int i = 0; i < s.length/2; i++) {
-            if (p.popCharacter() != p.dequeueCharacter()) {
-                isPalindrome = false;
-                break;
-            }
-        }
-
-        //Finally, print whether string s is palindrome or not.
-        System.out.println( "The word, " + input + ", is "
-                + ( (!isPalindrome) ? "not a palindrome." : "a palindrome." ) );
+        AdvancedArithmetic myCalculator = new Calculator();
+        int sum = myCalculator.divisorSum(n);
+        System.out.println("I implemented: " + myCalculator.getClass().getInterfaces()[0].getName() );
+        System.out.println(sum);
     }
 }
