@@ -1,38 +1,43 @@
-import java.io.*;
 import java.util.*;
-import java.text.*;
-import java.math.*;
-import java.util.regex.*;
+
+class Printer <T> {
+
+    /**
+     *    Method Name: printArray
+     *    Print each element of the generic array on a new line. Do not return anything.
+     *    @param A generic array
+     **/
+
+    // Write your code here
+    public <T> void printArray(T[] n){
+        for(T element : n){
+            System.out.println(element);
+        }
+    }
+}
 
 public class Solution {
 
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        int n = in.nextInt();
-        int[] a = new int[n];
-        for(int a_i=0; a_i < n; a_i++){
-            a[a_i] = in.nextInt();
+    public static void main(String args[]){
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        Integer[] intArray = new Integer[n];
+        for (int i = 0; i < n; i++) {
+            intArray[i] = scanner.nextInt();
         }
-        int numberOfSwaps = 0;
-        // Write Your Code Here
-        for(int i = 0; i < n; i++){
-            for(int j = 0; j < n-1; j++){
-                if(a[j] > a[j+1]){
-                    int temp = 0;
-                    temp = a[j];
-                    a[j] = a[j+1];
-                    a[j+1] = temp;
-                    numberOfSwaps++;
-                }
-            }
-            if(numberOfSwaps == 0){
-                break;
-            }
+
+        n = scanner.nextInt();
+        String[] stringArray = new String[n];
+        for (int i = 0; i < n; i++) {
+            stringArray[i] = scanner.next();
         }
-        System.out.println("Array is sorted in " + numberOfSwaps + " swaps");
-        System.out.println("First Element: " + a[0]);
-        System.out.println("Last Element: " + a[n-1]);
+
+        Printer<Integer> intPrinter = new Printer<Integer>();
+        Printer<String> stringPrinter = new Printer<String>();
+        intPrinter.printArray( intArray  );
+        stringPrinter.printArray( stringArray );
+        if(Printer.class.getDeclaredMethods().length > 1){
+            System.out.println("The Printer class should only have 1 method named printArray.");
+        }
     }
-
-
 }
